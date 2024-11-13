@@ -47,17 +47,38 @@ namespace AiSD_pracadomowa_1
         {
             var nowy= new NodeL(liczba);
 
+            // this.tail wskazuje na ostatni element w liście, więc nowy.prev = this.tail oznacza, że nowy węzeł staje się „następnikiem” aktualnego ogona listy.
             nowy.prev = this.tail;
+
              if(this.count > 0)
             {
+                //Dotychczasowy ogon listy (this.tail) dostaje w polu next referencję na nowy węzeł (this.tail.next = nowy).
+                //Dzięki temu dotychczasowy ogon jest połączony z nowym węzłem jako jego następnik.
                 this.tail.next = nowy;
             }
             else
             {
+                //W tym przypadku ustawiamy this.head = nowy, aby nowy węzeł był zarówno głową, jak i ogonem listy.
                 this.head = nowy;
             }
+            //Niezależnie od tego, czy lista była pusta, czy nie, nowy węzeł staje się ogonem listy, więc this.tail wskazuje teraz na niego.
             this.tail = nowy;
             count++;
+        }
+
+        public void RemoveFirst()
+        {
+            count--;
+            if (count == 0)
+            {
+                this.tail = null;
+            }
+            else
+            {
+                this.head = this.head.next;
+                this.head.prev.next = null;
+                this.head.prev = null;
+            }
         }
     }
 }
