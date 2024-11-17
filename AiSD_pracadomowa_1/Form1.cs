@@ -253,5 +253,30 @@ namespace AiSD_pracadomowa_1
             }
 
         }
+
+        private void AddFirst_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AddLast_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RemoveFirst_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RemoveLast_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Get_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
