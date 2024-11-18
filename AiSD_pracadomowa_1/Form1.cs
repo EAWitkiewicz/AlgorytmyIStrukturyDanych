@@ -256,22 +256,56 @@ namespace AiSD_pracadomowa_1
 
         private void AddFirst_Click(object sender, EventArgs e)
         {
-
+            MessageBox.Show("Dodawanie 1 elementu:");
+            Lista lista = new Lista();
+            MessageBox.Show("Lista: "+lista.ToString());
+            lista.AddFirst(1);
+            MessageBox.Show("Lista: " + lista.ToString());
+            lista.AddFirst(2);
+            MessageBox.Show("Lista: " + lista.ToString());
+            lista.AddFirst(3);
+            MessageBox.Show("Lista: " + lista.ToString());
+            lista.AddFirst(4);
+            MessageBox.Show("Lista: " + lista.ToString());
         }
 
         private void AddLast_Click(object sender, EventArgs e)
         {
-
+            MessageBox.Show("Dodawanie ostatniego elementu:");
+            Lista lista = new Lista();
+            MessageBox.Show("Lista: " + lista.ToString());
+            lista.AddLast(1);
+            MessageBox.Show("Lista: " + lista.ToString());
+            lista.AddLast(2);
+            MessageBox.Show("Lista: " + lista.ToString());
+            lista.AddLast(3);
+            MessageBox.Show("Lista: " + lista.ToString());
+            lista.AddLast(4);
+            MessageBox.Show("Lista: " + lista.ToString());
         }
 
         private void RemoveFirst_Click(object sender, EventArgs e)
         {
-
+            Lista lista = new Lista();
+            lista.AddLast(1);
+            lista.AddLast(2);
+            lista.AddLast(3);
+            MessageBox.Show("Usuwanie 1 elementu:");
+            MessageBox.Show(lista.ToString());
+            lista.RemoveFirst();
+            MessageBox.Show(lista.ToString());
         }
 
         private void RemoveLast_Click(object sender, EventArgs e)
         {
-
+            Lista lista = new Lista();
+            lista.AddLast(1);
+            lista.AddLast(2);
+            lista.AddLast(3);
+            MessageBox.Show("Usuwanie ostatniego elementu:");
+            MessageBox.Show(lista.ToString());
+            lista.RemoveLast();
+            MessageBox.Show(lista.ToString());
         }
 
         private void Get_Click(object sender, EventArgs e)
