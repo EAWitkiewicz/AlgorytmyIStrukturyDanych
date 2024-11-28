@@ -312,5 +312,30 @@ namespace AiSD_pracadomowa_1
         {
 
         }
+
+        private void AddFirstTree_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AddLastTree_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RemoveFirstTree_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RemoveLastTree_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void GetTree_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
