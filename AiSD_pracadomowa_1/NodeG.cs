@@ -8,5 +8,6 @@ namespace AiSD_pracadomowa_1
 {
     internal class NodeG
     {
+        int data;
     }
 }

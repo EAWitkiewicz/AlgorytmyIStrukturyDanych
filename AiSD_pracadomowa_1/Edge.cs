@@ -8,5 +8,8 @@ namespace AiSD_pracadomowa_1
 {
     internal class Edge
     {
+        NodeG start;
+        NodeG end;
+        int weight;
     }
 }

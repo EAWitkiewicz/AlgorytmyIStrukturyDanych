@@ -47,13 +47,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BST.cs" />
+    <Compile Include="Edge.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Graf.cs" />
     <Compile Include="Lista.cs" />
+    <Compile Include="NodeG.cs" />
     <Compile Include="NodeL.cs" />
     <Compile Include="NodeT.cs" />
     <Compile Include="Program.cs" />
