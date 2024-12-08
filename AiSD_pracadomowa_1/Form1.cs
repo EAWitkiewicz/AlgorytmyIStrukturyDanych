@@ -16,12 +16,12 @@ namespace AiSD_pracadomowa_1
         {
             InitializeComponent();
         }
-        public static String Wypisz(int[]tab)
+        public static String Wypisz(int[] tab)
         {
             String tab1 = "";
             foreach (var item in tab)
             {
-                tab1=tab1+item;
+                tab1 = tab1 + item;
             }
             return tab1;
         }
@@ -149,11 +149,11 @@ namespace AiSD_pracadomowa_1
                         swap = tab[i];
                         tab[i] = tab[i + 1];
                         tab[i + 1] = swap;
-                    MessageBox.Show(Wypisz(tab));                    
+                        MessageBox.Show(Wypisz(tab));
                     }
                 }
             }
-                    MessageBox.Show(Wypisz(tab));
+            MessageBox.Show(Wypisz(tab));
         }
         private void InsertSort_Click(object sender, EventArgs e)
         {
@@ -197,7 +197,7 @@ namespace AiSD_pracadomowa_1
         private void QuickSort_Click(object sender, EventArgs e)
         {
             int[] tab = { 8, 2, 1, 9, 5 };
-            quickSort(tab,0,tab.Length-1);
+            quickSort(tab, 0, tab.Length - 1);
         }
 
         private void CountingSort_Click(object sender, EventArgs e)
@@ -224,7 +224,7 @@ namespace AiSD_pracadomowa_1
                 tabLiczników[i] = 0;
                 for (int j = 0; j < tab.Length; j++)
                 {
-                //jesli wartosc w tablicy pierwotnej jest taka sama jak index tablicy licznikow to zwiekszamy wartosc w tablicy licznikow
+                    //jesli wartosc w tablicy pierwotnej jest taka sama jak index tablicy licznikow to zwiekszamy wartosc w tablicy licznikow
                     if (tab[j] == i)
                     {
                         tabLiczników[i]++;
@@ -258,7 +258,7 @@ namespace AiSD_pracadomowa_1
         {
             MessageBox.Show("Dodawanie 1 elementu:");
             Lista lista = new Lista();
-            MessageBox.Show("Lista: "+lista.ToString());
+            MessageBox.Show("Lista: " + lista.ToString());
             lista.AddFirst(1);
             MessageBox.Show("Lista: " + lista.ToString());
             lista.AddFirst(2);
@@ -309,6 +309,37 @@ namespace AiSD_pracadomowa_1
         }
 
         private void Get_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AddFirstTree_Click(object sender, EventArgs e)
+        {
+            var drzewo = new BST();
+            MessageBox.Show(drzewo.ToString());
+            drzewo.Add(2);
+            drzewo.Add(5);
+            drzewo.Add(1);
+            drzewo.Add(4);
+            MessageBox.Show(drzewo.ToString());
+        }
+
+        private void AddLastTree_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RemoveFirstTree_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RemoveLastTree_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void GetTree_Click(object sender, EventArgs e)
         {
 
         }

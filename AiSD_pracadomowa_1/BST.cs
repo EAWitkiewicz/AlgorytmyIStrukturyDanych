@@ -24,7 +24,7 @@ namespace AiSD_pracadomowa_1
                 // Kończymy dodawanie, ponieważ korzeń już został ustawiony.
             }
             // Znajduje rodzica (istniejący węzeł), pod którego zostanie wstawiony nowy węzeł.
-            var rodzic = this.znajdzRodzica(dodawana);
+            var rodzic = this.znajdzRodzica(dziecko);
 
             // Ustawia odniesienie do rodzica dla nowego węzła.
             dziecko.rodzic = rodzic;
@@ -33,12 +33,12 @@ namespace AiSD_pracadomowa_1
             // Jeśli nowy węzeł ma wartość mniejszą niż rodzic, jest dodawany jako lewe dziecko.
             if (dziecko.data < rodzic.data)
             {
-                rodzic.lewe = dodawana;
+                rodzic.lewe = dziecko;
             }
             // W przeciwnym razie jest dodawany jako prawe dziecko rodzica.
             else
             {
-                rodzic.prawe = dodawana;
+                rodzic.prawe = dziecko;
             }
         }
         // Znajduje odpowiedniego rodzica dla nowego węzła w drzewie.
@@ -91,14 +91,15 @@ namespace AiSD_pracadomowa_1
             NodeT obecny = root;
 
             // Pętla działa, dopóki istnieje coś na stosie lub mamy aktualny węzeł do przetworzenia.
-            while (stos.Count>0 || obecny != null)
+            while (stos.Count > 0 || obecny != null)
             {
-                while(obecny!=null){
+                while (obecny != null)
+                {
                     //dodajemy wezel na stos poniewac bedziemy do niego wracac i przechodzimy do lewego dziecka
                     stos.Push(obecny);
                     //przechodzimy do lewego dziecka
-                    obecny = obecny.lewe
-                        }
+                    obecny = obecny.lewe;
+                }
                 //Pobieramy wezel ze stosu (wracamy do ostatniego odwiedzonego wezla)
                 obecny = stos.Pop();
 
@@ -110,12 +111,95 @@ namespace AiSD_pracadomowa_1
             // Łączymy wszystkie wartości z listy wyników w jeden ciąg znaków, oddzielony spacjami, i zwracamy go.
             return string.Join(" ", wyniki);
         }
-        //add first
-        //add last
-        //rmove last
-        //remove first
-        //tostring
-        //get(int liczba)
+
+        public NodeT RemoveO(NodeT w)
+        {
+            if (w == null)
+            {
+                this.root = null;
+                return w;
+            }
+            var rodzic = w.rodzic;
+            w.rodzic = null;
+            if (rodzic.lewe == w)
+            {
+                rodzic.lewe = null;
+            }
+            if (rodzic.prawe == w)
+            {
+                rodzic.prawe = null;
+            }
+            return w;
+        }
+
+        public NodeT Remove1(NodeT w)
+        {
+            NodeT dziecko = null;
+            if (w.lewe != null)
+            {
+                dziecko = this.RemoveO(w.lewe);
+
+            }
+            else if (w.prawe != null)
+            {
+                dziecko = this.RemoveO(w.prawe);
+            }
+
+
+            if (this.root == w)
+            {
+                this.root = dziecko;
+            }
+            else
+            {
+                dziecko.rodzic = w.rodzic;
+
+                if (w.rodzic.lewe == w)
+                {
+                    this.RemoveO(w);
+                    w.rodzic.lewe = dziecko;
+                }
+                else
+                {
+                    this.RemoveO(w);
+                    w.rodzic.prawe = dziecko;
+                }
+            }
+
+            return w;
+        }
+
+        //DOKONCZYC!!!!
+        //public NodeT RemoveT(NodeT w)
+        //{
+        //    //k=kandydat
+        //    switch (w.ileDzieci())
+        //    {
+        //        case 0:
+        //            return this.RemoveT(w);
+        //        case 1:
+        //            return this.RemoveT(w);
+        //        case 2:
+        //            {
+        //                var k = this.Min(w.prawe);
+        //                this.RemoveT(k);
+        //                return this.RemoveT(w);
+        //                //przepiac kandydata
+        //                //TUTAJ!!!
+        //            }
+        //    }
+        //}
+
+        public NodeT Min(NodeT w)
+
+        {
+            var wynik = w;
+            while (wynik.lewe != null)
+            {
+                wynik = wynik.lewe;
+            }
+            return wynik;
+        }
     }
 }
-}
+
