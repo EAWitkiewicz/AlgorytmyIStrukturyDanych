@@ -315,6 +315,7 @@ namespace AiSD_pracadomowa_1
 
         private void AddFirstTree_Click(object sender, EventArgs e)
         {
+<<<<<<< HEAD
             var drzewo = new BST();
             MessageBox.Show(drzewo.ToString());
             drzewo.Add(2);
@@ -322,6 +323,9 @@ namespace AiSD_pracadomowa_1
             drzewo.Add(1);
             drzewo.Add(4);
             MessageBox.Show(drzewo.ToString());
+=======
+
+>>>>>>> 0cffb72b1813dd7dd3bf1616f7ea5e85f01f8f87
         }
 
         private void AddLastTree_Click(object sender, EventArgs e)

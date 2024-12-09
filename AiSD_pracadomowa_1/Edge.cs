@@ -13,4 +13,3 @@ namespace AiSD_pracadomowa_1
         int weight;
     }
 }
-

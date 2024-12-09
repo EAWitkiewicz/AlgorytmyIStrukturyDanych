@@ -15,5 +15,22 @@ namespace AiSD_pracadomowa_1
             {
                 this.data = liczba;
             }
+
+        public int ileDzieci()
+        {
+            int wynik = 0;
+
+            if (this.lewe != null)
+            {
+                wynik++;
+            }
+            if (this.prawe != null)
+            {
+                wynik++;
+            }
+            return wynik;
+        }
+
+ 
     }
 }

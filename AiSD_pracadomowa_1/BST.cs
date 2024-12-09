@@ -93,8 +93,12 @@ namespace AiSD_pracadomowa_1
             // Pętla działa, dopóki istnieje coś na stosie lub mamy aktualny węzeł do przetworzenia.
             while (stos.Count > 0 || obecny != null)
             {
+<<<<<<< HEAD
                 while (obecny != null)
                 {
+=======
+                while (obecny != null) {
+>>>>>>> 0cffb72b1813dd7dd3bf1616f7ea5e85f01f8f87
                     //dodajemy wezel na stos poniewac bedziemy do niego wracac i przechodzimy do lewego dziecka
                     stos.Push(obecny);
                     //przechodzimy do lewego dziecka
