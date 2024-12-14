@@ -1,0 +1,255 @@
+using System; // Przestrzeń nazw zawierająca podstawowe klasy i funkcjonalności.
+using System.Collections.Generic; // Przestrzeń nazw dla kolekcji, takich jak List<T>.
+using System.Linq; // Przestrzeń nazw umożliwiająca używanie funkcji LINQ, np. Max.
+using System.Net.WebSockets; // Przestrzeń nazw dla implementacji WebSocket (nieużywana tutaj).
+using System.Runtime.InteropServices; // Przestrzeń nazw do interakcji z kodem niezarządzanym (nieużywana tutaj).
+using System.Text; // Przestrzeń nazw do kodowania i dekodowania ciągów znaków (nieużywana tutaj).
+using System.Threading; // Przestrzeń nazw dla wątków (nieużywana tutaj).
+using System.Threading.Tasks; // Przestrzeń nazw dla programowania asynchronicznego (nieużywana tutaj).
+
+namespace kolosalg // Definicja przestrzeni nazw programu.
+{
+    internal class Program // Główna klasa programu.
+    {
+        static void Main(string[] args) // Główna metoda programu, punkt wejścia aplikacji.
+        {
+            string liczba_usera = Console.ReadLine(); // Pobiera liczbę od użytkownika w postaci ciągu znaków.
+            int liczba = int.Parse(liczba_usera); // Konwertuje pobrany ciąg znaków na liczbę całkowitą.
+            var tab = generujTablice(liczba); // Wywołuje funkcję do wygenerowania tablicy liczb losowych o podanej długości.
+            Wypisz(tab); // Wywołuje funkcję, która wypisuje zawartość tablicy na ekranie.
+
+            MS1(tab, 0, tab.Length - 1); // Sortuje tablicę przy użyciu zmodyfikowanego algorytmu Merge Sort.
+            Wypisz(tab); // Wypisuje posortowaną tablicę.
+            Console.ReadLine(); // Oczekuje na wciśnięcie klawisza Enter przez użytkownika.
+        }
+
+        public static void Wypisz(int[] tab) // Funkcja wypisująca elementy tablicy na ekranie.
+        {
+            foreach (var item in tab) // Iteruje po wszystkich elementach tablicy.
+            {
+                Console.Write(item + " "); // Wypisuje każdy element z odstępem.
+            }
+            Console.WriteLine(); // Przechodzi do nowej linii po wypisaniu tablicy.
+        }
+
+        public static int[] generujTablice(int dlugosc) // Funkcja generująca tablicę losowych liczb.
+        {
+            Random random = new Random(); // Tworzy obiekt generatora liczb losowych.
+            int[] tab = new int[dlugosc]; // Tworzy tablicę o podanej długości.
+            for (int i = 0; i < tab.Length; i++) // Iteruje po wszystkich indeksach tablicy.
+            {
+                tab[i] = random.Next(10); // Wypełnia tablicę losowymi liczbami od 0 do 9.
+            }
+            return tab; // Zwraca wygenerowaną tablicę.
+        }
+
+        static void IS(int[] tab) // Funkcja implementująca algorytm sortowania przez wstawianie (Insertion Sort).
+        {
+            for (int i = 1; i < tab.Length; i++) // Iteruje od drugiego elementu do końca tablicy.
+            {
+                int wskaznik = tab[i]; // Przechowuje aktualny element do wstawienia.
+                int j = i - 1; // Inicjalizuje indeks poprzedniego elementu.
+                while (j >= 0 && tab[j] > wskaznik) // Przesuwa większe elementy w prawo.
+                {
+                    tab[j + 1] = tab[j];
+                    j--;
+                }
+                tab[j + 1] = wskaznik; // Wstawia element na odpowiednie miejsce.
+            }
+            Wypisz(tab); // Wypisuje posortowaną tablicę.
+        }
+
+        static void BS(int[] tab) // Funkcja implementująca algorytm sortowania bąbelkowego (Bubble Sort).
+        {
+            int swap = 0; // Zmienna pomocnicza do zamiany elementów.
+            for (int k = 0; k < tab.Length - 1; k++) // Powtarza proces sortowania dla każdego elementu.
+            {
+                for (int i = 0; i < tab.Length - 1; i++) // Iteruje po sąsiadujących elementach.
+                {
+                    if (tab[i] > tab[i + 1]) // Jeśli element jest większy od następnego...
+                    {
+                        swap = tab[i]; // Zamienia miejscami elementy.
+                        tab[i] = tab[i + 1];
+                        tab[i + 1] = swap;
+                    }
+                }
+            }
+            Wypisz(tab); // Wypisuje posortowaną tablicę.
+        }
+
+        static int[] ZS(int[] tab) // Funkcja implementująca algorytm sortowania przez zliczanie (Counting Sort).
+        {
+            int max = tab.Max(); // Znajduje największy element w tablicy.
+            int[] liczniki = new int[max + 1]; // Tworzy tablicę liczników o rozmiarze równym największemu elementowi.
+
+            foreach (int i in tab) // Iteruje po elementach tablicy wejściowej.
+            {
+                liczniki[i]++; // Zwiększa licznik dla danego elementu.
+            }
+
+            List<int> posortowana = new List<int>(); // Tworzy listę do przechowywania posortowanych elementów.
+
+            for (int i = 0; i < liczniki.Length; i++) // Iteruje po tablicy liczników.
+            {
+                while (liczniki[i] > 0) // Dodaje do listy odpowiednią liczbę wystąpień danego elementu.
+                {
+                    posortowana.Add(i);
+                    liczniki[i]--;
+                }
+            }
+            return posortowana.ToArray(); // Konwertuje listę na tablicę i zwraca wynik.
+        }
+
+        static void MS(int[] array, int start, int end) // Funkcja implementująca standardowy algorytm Merge Sort.
+        {
+            if (start < end) // Sprawdza, czy przedział do posortowania jest poprawny.
+            {
+                int middle = start + (end - start) / 2; // Wyznacza środek przedziału.
+
+                MS(array, start, middle); // Rekurencyjnie sortuje lewą połowę.
+                MS(array, middle + 1, end); // Rekurencyjnie sortuje prawą połowę.
+                M(array, start, middle, end); // Scalanie posortowanych połówek.
+            }
+        }
+
+        static void M(int[] array, int start, int middle, int end) // Funkcja do scalania w algorytmie Merge Sort.
+        {
+            int ll = middle - start + 1; // Długość lewej części.
+            int rl = end - middle; // Długość prawej części.
+
+            int[] la = new int[ll]; // Tablica dla lewej części.
+            int[] ra = new int[rl]; // Tablica dla prawej części.
+
+            int i = 0, j = 0;
+
+            while (i < ll) // Kopiuje elementy do lewej części.
+            {
+                la[i] = array[start + i];
+                i++;
+            }
+            while (j < rl) // Kopiuje elementy do prawej części.
+            {
+                ra[j] = array[middle + 1 + j];
+                j++;
+            }
+
+            i = 0; j = 0; int k = start; // Indeksy pomocnicze.
+
+            while (i < ll && j < rl) // Scala elementy z lewej i prawej części.
+            {
+                if (la[i] <= ra[j])
+                {
+                    array[k] = la[i];
+                    i++;
+                }
+                else
+                {
+                    array[k] = ra[j];
+                    j++;
+                }
+                k++;
+            }
+
+            while (i < ll) // Dodaje pozostałe elementy z lewej części.
+            {
+                array[k] = la[i];
+                i++;
+                k++;
+            }
+            while (j < rl) // Dodaje pozostałe elementy z prawej części.
+            {
+                array[k] = ra[j];
+                j++;
+                k++;
+            }
+        }
+
+        static void MS1(int[] tab, int start, int koniec) // Modyfikacja algorytmu Merge Sort.
+        {
+            if (start < koniec)
+            {
+                int srodek = start + (koniec - start) / 2; // Wyznacza środek przedziału.
+                MS1(tab, start, srodek); // Sortuje lewą połowę.
+                MS1(tab, srodek + 1, koniec); // Sortuje prawą połowę.
+                S2(tab, start, srodek, koniec); // Scalanie.
+            }
+        }
+
+        static void QS(int[] tab, int l, int p) // Funkcja implementująca algorytm Quick Sort.
+        {
+            int pivot = tab[(l + p) / 2]; // Wybiera środkowy element jako pivot.
+            int i = l;
+            int j = p;
+
+            do
+            {
+                while (tab[i] < pivot) i++; // Szuka elementu większego od pivotu z lewej strony.
+                while (tab[j] > pivot) j--; // Szuka elementu mniejszego od pivotu z prawej strony.
+
+                if (i <= j) // Zamienia miejscami elementy, jeśli są po złej stronie pivotu.
+                {
+                    int swap = tab[i];
+                    tab[i] = tab[j];
+                    tab[j] = swap;
+                    i++;
+                    j--;
+                }
+            } while (i <= j);
+
+            if (j > l) QS(tab, l, j); // Rekurencyjnie sortuje lewą część.
+            if (i < p) QS(tab, i, p); // Rekurencyjnie sortuje prawą część.
+        }
+
+        static void S2(int[] tab, int start, int srodek, int koniec) // Funkcja scalania dla zmodyfikowanego Merge Sort.
+        {
+            int ld = srodek - start + 1; // Długość lewej części.
+            int pd = koniec - srodek; // Długość prawej części.
+
+            int[] lt = new int[ld]; // Tablica dla lewej części.
+            int[] pt = new int[pd]; // Tablica dla prawej części.
+
+            int i = 0, j = 0;
+
+            while (i < ld) // Kopiuje elementy do lewej części.
+            {
+                lt[i] = tab[start + i];
+                i++;
+            }
+            while (j < pd) // Kopiuje elementy do prawej części.
+            {
+                pt[j] = tab[srodek + j + 1];
+                j++;
+            }
+
+            i = 0; j = 0; int k = start; // Indeksy pomocnicze.
+
+            while (i < ld && j < pd) // Scala elementy z lewej i prawej części.
+            {
+                if (lt[i] <= pt[j])
+                {
+                    tab[k] = lt[i];
+                    i++;
+                }
+                else
+                {
+                    tab[k] = pt[j];
+                    j++;
+                }
+                k++;
+            }
+
+            while (i < ld) // Dodaje pozostałe elementy z lewej części.
+            {
+                tab[k] = lt[i];
+                i++;
+                k++;
+            }
+            while (j < pd) // Dodaje pozostałe elementy z prawej części.
+            {
+                tab[k] = pt[j];
+                j++;
+                k++;
+            }
+        }
+    }
+}
